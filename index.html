@@ -1,75 +1,55 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shadow SMS Panel v0.1</title>
+<title>Shadow SMS Panel v0.3</title>
 <style>
 :root{--cy:#00f0ff;--mg:#ff2bd6}
 html,body{margin:0;padding:0;background:#05060a}
-#matrix{
-  position:fixed;inset:0;z-index:0;
-  display:block;width:100vw;height:100vh;
-  opacity:.28;
-}
-.wrap{
-  position:relative;z-index:1;
-  color:var(--cy);font-family:monospace;
-  padding:20px;max-width:460px;margin:0 auto;
-  min-height:100vh;box-sizing:border-box;
-}
+#matrix{position:fixed;inset:0;z-index:0;display:block;width:100vw;height:100vh;opacity:.28}
+.wrap{position:relative;z-index:1;color:var(--cy);font-family:monospace;padding:20px;max-width:460px;margin:0 auto;min-height:100vh;box-sizing:border-box}
 h1{color:var(--mg);letter-spacing:.15em;font-size:16px;margin:0 0 4px;text-shadow:0 0 12px rgba(255,43,214,.6)}
 .ver{color:#7a8399;font-size:10px;letter-spacing:.25em;margin-bottom:18px}
+.sect{color:var(--mg);font-size:11px;letter-spacing:.25em;margin:18px 0 8px;border-bottom:1px solid rgba(255,43,214,.25);padding-bottom:5px}
 input,textarea,button{width:100%;padding:11px;margin:6px 0;background:rgba(4,5,10,.85);color:var(--cy);border:1px solid rgba(0,240,255,.3);border-radius:8px;font-family:inherit;box-sizing:border-box;backdrop-filter:blur(4px)}
 textarea{height:90px}
 button{background:var(--cy);color:#000;font-weight:800;cursor:pointer;box-shadow:0 0 14px rgba(0,240,255,.35)}
 button:hover{box-shadow:0 0 22px var(--cy)}
+button.mg{background:var(--mg);color:#fff;box-shadow:0 0 14px rgba(255,43,214,.45)}
+button.mg:hover{box-shadow:0 0 22px var(--mg)}
 pre{background:rgba(4,5,10,.85);border:1px solid rgba(0,240,255,.2);padding:10px;border-radius:8px;font-size:10px;max-height:200px;overflow:auto;backdrop-filter:blur(4px)}
 
 .made{text-align:center;margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:14px}
-.made-badge{
-  display:inline-block;color:#04050a;
-  background:linear-gradient(90deg,var(--cy),var(--mg));
-  padding:11px 26px;border-radius:999px;
-  font-size:12px;font-weight:900;letter-spacing:.35em;
-  box-shadow:0 0 22px rgba(0,240,255,.6),0 0 44px rgba(255,43,214,.4),0 0 0 2px rgba(255,255,255,.08) inset;
-  text-shadow:0 0 6px rgba(255,255,255,.35);
-  animation:makerPulse 2.6s ease-in-out infinite;position:relative;
-}
-.made-badge::before{
-  content:"";position:absolute;inset:-6px;border-radius:999px;
-  background:linear-gradient(90deg,var(--cy),var(--mg));
-  filter:blur(14px);opacity:.55;z-index:-1;
-}
-@keyframes makerPulse{
-  0%,100%{transform:scale(1);box-shadow:0 0 22px rgba(0,240,255,.6),0 0 44px rgba(255,43,214,.4)}
-  50%{transform:scale(1.035);box-shadow:0 0 32px rgba(0,240,255,.85),0 0 60px rgba(255,43,214,.65)}
-}
-.tg-card{
-  display:inline-flex;align-items:center;gap:10px;
-  border:1px solid rgba(0,240,255,.35);
-  background:linear-gradient(180deg,rgba(0,240,255,.08),rgba(255,43,214,.05));
-  padding:9px 16px;border-radius:999px;
-  box-shadow:0 0 18px rgba(0,240,255,.25);
-  text-decoration:none;backdrop-filter:blur(4px);
-  transition:transform .15s,box-shadow .2s,border-color .2s;
-}
+.made-badge{display:inline-block;color:#04050a;background:linear-gradient(90deg,var(--cy),var(--mg));padding:11px 26px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.35em;box-shadow:0 0 22px rgba(0,240,255,.6),0 0 44px rgba(255,43,214,.4),0 0 0 2px rgba(255,255,255,.08) inset;text-shadow:0 0 6px rgba(255,255,255,.35);animation:makerPulse 2.6s ease-in-out infinite;position:relative}
+.made-badge::before{content:"";position:absolute;inset:-6px;border-radius:999px;background:linear-gradient(90deg,var(--cy),var(--mg));filter:blur(14px);opacity:.55;z-index:-1}
+@keyframes makerPulse{0%,100%{transform:scale(1);box-shadow:0 0 22px rgba(0,240,255,.6),0 0 44px rgba(255,43,214,.4)}50%{transform:scale(1.035);box-shadow:0 0 32px rgba(0,240,255,.85),0 0 60px rgba(255,43,214,.65)}}
+.tg-card{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(0,240,255,.35);background:linear-gradient(180deg,rgba(0,240,255,.08),rgba(255,43,214,.05));padding:9px 16px;border-radius:999px;box-shadow:0 0 18px rgba(0,240,255,.25);text-decoration:none;backdrop-filter:blur(4px);transition:transform .15s,box-shadow .2s,border-color .2s}
 .tg-card:hover{transform:translateY(-1px);border-color:var(--cy);box-shadow:0 0 26px rgba(0,240,255,.5)}
 .tg-card svg{width:20px;height:20px;display:block;filter:drop-shadow(0 0 6px rgba(0,240,255,.8))}
-.tg-handle{
-  font-size:12px;font-weight:800;letter-spacing:.15em;
-  background:linear-gradient(90deg,var(--cy),var(--mg));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
+.tg-handle{font-size:12px;font-weight:800;letter-spacing:.15em;background:linear-gradient(90deg,var(--cy),var(--mg));-webkit-background-clip:text;background-clip:text;color:transparent}
 </style></head><body>
 
 <canvas id="matrix"></canvas>
 
 <div class="wrap">
 <h1>Shadow SMS Panel</h1>
-<div class="ver">v0.1</div>
+<div class="ver">v0.3</div>
+
+<div class="sect">SMS → DIRECT NUMBER (FAST2SMS)</div>
+<input id="num" placeholder="phone number (10 digit ya +91...)" inputmode="tel">
+<textarea id="smsmsg" placeholder="message to send as SMS..."></textarea>
+<button class="mg" onclick="smsSend()">SEND SMS</button>
+
+<div class="sect">TELEGRAM → BOT</div>
+<input id="cid" placeholder="telegram chat id" inputmode="numeric">
+<textarea id="tmsg" placeholder="message via telegram bot..."></textarea>
+<button class="mg" onclick="tgsend()">SEND VIA TELEGRAM</button>
+
+<div class="sect">ANON RELAY</div>
 <button onclick="c()">NEW TOKEN</button>
 <input id="t" placeholder="token">
-<textarea id="m" placeholder="message..."></textarea>
+<textarea id="m" placeholder="anon message..."></textarea>
 <button onclick="s()">SEND ANON</button>
 <button onclick="r()">RECEIVE</button>
+
 <pre id="o">idle</pre>
 
 <div class="made">
@@ -91,46 +71,56 @@ pre{background:rgba(4,5,10,.85);border:1px solid rgba(0,240,255,.2);padding:10px
 </div>
 
 <script>
-/* ===== MATRIX RAIN ===== */
 (function(){
   var cv=document.getElementById('matrix');
   var ctx=cv.getContext('2d');
   var cols, drops, fontSize=16;
   var chars='アカサタナハマヤラワ0123456789ABCDEFabcdef#$%&*+=<>?';
-  function resize(){
-    cv.width=window.innerWidth;
-    cv.height=window.innerHeight;
-    cols=Math.floor(cv.width/fontSize);
-    drops=[];
-    for(var i=0;i<cols;i++) drops[i]=Math.random()*cv.height/fontSize;
-  }
-  resize();
-  window.addEventListener('resize',resize);
+  function resize(){cv.width=window.innerWidth;cv.height=window.innerHeight;cols=Math.floor(cv.width/fontSize);drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*cv.height/fontSize;}
+  resize();window.addEventListener('resize',resize);
   function draw(){
-    ctx.fillStyle='rgba(5,6,10,0.08)';
-    ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle='rgba(5,6,10,0.08)';ctx.fillRect(0,0,cv.width,cv.height);
     ctx.font=fontSize+'px monospace';
     for(var i=0;i<drops.length;i++){
       var ch=chars.charAt(Math.floor(Math.random()*chars.length));
-      var x=i*fontSize;
-      var y=drops[i]*fontSize;
-      var r=Math.random();
-      if(r>0.96){
-        ctx.fillStyle='rgba(255,43,214,0.95)';
-      }else if(r>0.85){
-        ctx.fillStyle='rgba(180,255,240,0.95)';
-      }else{
-        ctx.fillStyle='rgba(0,240,255,0.75)';
-      }
+      var x=i*fontSize,y=drops[i]*fontSize,r=Math.random();
+      if(r>0.96)ctx.fillStyle='rgba(255,43,214,0.95)';
+      else if(r>0.85)ctx.fillStyle='rgba(180,255,240,0.95)';
+      else ctx.fillStyle='rgba(0,240,255,0.75)';
       ctx.fillText(ch,x,y);
-      if(y>cv.height && Math.random()>0.975) drops[i]=0;
+      if(y>cv.height&&Math.random()>0.975)drops[i]=0;
       drops[i]++;
     }
   }
   setInterval(draw,50);
 })();
 
-/* ===== RELAY ===== */
+async function smsSend(){
+  var n=document.getElementById('num').value.trim();
+  var m=document.getElementById('smsmsg').value.trim();
+  var o=document.getElementById('o');
+  if(!n||!m){o.textContent='number + message chahiye';return}
+  o.textContent='sending sms...';
+  try{
+    var x=await fetch('/api/sms',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({number:n,message:m})});
+    var j=await x.json();
+    o.textContent=JSON.stringify(j,null,2);
+  }catch(e){o.textContent='error: '+e.message}
+}
+
+async function tgsend(){
+  var cid=document.getElementById('cid').value.trim();
+  var m=document.getElementById('tmsg').value.trim();
+  var o=document.getElementById('o');
+  if(!cid||!m){o.textContent='chat id + message chahiye';return}
+  o.textContent='sending via telegram...';
+  try{
+    var x=await fetch('/api/tgsend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:cid,message:m})});
+    var j=await x.json();
+    o.textContent=JSON.stringify(j,null,2);
+  }catch(e){o.textContent='error: '+e.message}
+}
+
 async function c(){const x=await fetch('/api/create',{method:'POST'});const j=await x.json();document.getElementById('t').value=j.token;document.getElementById('o').textContent='token: '+j.token}
 async function s(){const t=document.getElementById('t').value,m=document.getElementById('m').value;if(!t||!m)return alert('token+msg');const x=await fetch('/api/send/'+t,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:m})});document.getElementById('o').textContent=JSON.stringify(await x.json())}
 async function r(){const t=document.getElementById('t').value;if(!t)return alert('token');const x=await fetch('/api/recv/'+t);document.getElementById('o').textContent=JSON.stringify(await x.json(),null,2)}
